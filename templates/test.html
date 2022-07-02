@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LXD3HSTXJK"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-LXD3HSTXJK');
+	</script>
+
+	<link rel="prefetch" as="script" href="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+	
+	<script src="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+	<title>Edspire AI | Test</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles/nav.css">
+	<link rel="stylesheet" type="text/css" href="styles/flex.css">
+	<link rel="stylesheet" type="text/css" href="styles/quiz.css">
+	
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/nav.css') }}">
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/flex.css') }}">
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/table.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/quiz.css') }}">
+<style>
+
+	#logout{
+		transition: 1s;
+	border-radius: 3px;
+	padding: 10px 30px;
+	position: absolute;
+	top: 60px;
+	right: 10px;
+	background-color: white;
+	border: 1px solid #80808078;
+	
+	font-family: "Inter-Regular";
+	display: none;
+	animation-fill-mode: forwards;
+	cursor: pointer;
+	}
+	#logout button{
+	
+	background-color: white;
+	border: 1px solid #80808078;
+	text-decoration: none;
+	color: black;
+	outline: none;
+	border: none;
+	font-family: "Inter-Semibold";
+	font-size: 1.0rem;
+	cursor:pointer;
+	}
+	#spanlast:hover #logout{
+		display: block;
+	}
+	#profile_pic {
+    height: 35px;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+#spanlast:hover #profile_pic{
+	box-sizing: border-box;
+    padding: 0px;
+    background-color: #eaeeff;
+    border-radius: 50%;	
+}
+.underline{
+	border-bottom: 3px solid #000000;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 2px;
+}.question_text {
+    font-weight: lighter;
+    margin-top: 5px;
+}
+#answer {
+    width: 50vw;
+    padding: 13px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: white;
+    font-family: 'Inter-Regular';
+    /* border-top-right-radius: 0px; */
+    /* border-bottom-right-radius: 0px; */
+	outline: auto;
+}
+#quiz{
+	padding-left: 30px;
+}
+@media(max-width: 768px){
+	#quiz{
+	padding-left: 0px;
+}
+}
+@media (max-width: 768px){
+.flexbox_row span:nth-child(2) {
+    margin-left: 0px;
+    width: auto;
+}
+.flexbox_row form span{
+	padding: 10px 20px !important;
+		
+		
+		font-size: 0.8rem;
+}
+.end{
+	margin-bottom: 0px !important;
+}
+#interactive_buttons{
+	justify-content: space-between;
+	width: 75vw;
+}
+}
+
+	</style>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+<body onload="createNav()">
+	<div class="wrapper">
+	<nav id="navbar"></nav>
+<div class='invisible' id='logout'>
+
+	<form action="/logout" method="Post">
+		<button type = "submit">Logout</button>
+		</form></div>
+
+		<div  id="myDiv" class="{{status}}" role="alert" style="    
+padding: 0px 15px;
+background-color: #ff4f4f;
+color: white;
+width: 100%;
+font-family: 'Inter-Light';
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-content: center;
+align-items: center;
+box-sizing: border-box;">
+
+
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			  <h4 id="incpass">{{ message }}
+			  
+			  <h4 id="close" onclick="dis()">✖</h4>
+			  </h4> 
+		  
+		{% endfor %}  
+		{% endif %}
+		{% endwith %}
+		
+		</div> 
+
+	<center style="margin-top:0px;">
+		<div style="background-color: var(--light-blue);padding: 30px 0px;">
+	<div class="flexbox_row flexbox_row_quiz" style="border-left: 4px solid var(--yellow);padding-left:30px;">
+		<span class="align_left"><h1 class="heading_bold remove_margin_bottom">{{courseID}}</h1><br><h4 class="subheading remove_margin_top">{{course}}</h4></span>
+		
+
+	</div></div>
+
+	<div class="flexbox_col" id="quiz">
+		<span class="child1">
+		<h2 class="underline">Question {{questionID}}</h2></span>
+		<span class="child2">
+			<h4 class="question_text">{{question}}</h4>
+
+
+
+
+<div class="flexbox_row">
+	<form action="/test" method="post" class="options">
+		<input autocomplete="off" type="hidden" id="questionID" name="questionID" value="{{questionID}}">
+
+  		<input autofocus autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" type="text" type="submit" formaction="/test" id="answer" name="answer" placeholder="Enter your answer here...">
+		  <span><button name="action"  value="submit" type="submit" style="visibility:hidden;" ></button></span>
+</div>
+<br><br><br><br><br><br>
+<div class="flexbox_row" id="interactive_buttons">
+	
+		<span id="endspan"><button type="submit" formaction="/end_test" class="end" style="    padding: 10px 20px !important;
+			color: #3F3F3F !important;
+			background-color: #FF7B7B !important;
+			font-size: 0.8rem;">END TEST</button></span>
+		
+		<span><button name="action"  value="skip" type="submit" style="    padding: 10px 20px !important;
+			color: #3F3F3F !important;
+			background-color: var(--light-blue) !important;
+			font-size: 0.8rem;">SKIP</button></span>
+		<span><button type="submit" name="action" value="submit"  style="    padding: 10px 20px !important;
+			color: #ffffff !important;
+			background-color:var(--blue) !important;
+			font-size: 0.8rem;
+			border-radius: 0px !important;">SUBMIT</button></span>
+	  </form>
+</div>
+
+</div>
+
+
+
+
+
+
+	</center>
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript">
+		function dis(){
+		  document.getElementById("myDiv").style.display = "none";
+		}
+		
+	  </script>
+
+	</div>
+
+</body>
+</html>

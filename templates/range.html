@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LXD3HSTXJK"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-LXD3HSTXJK');
+	</script>
+
+	<link rel="prefetch" as="script" href="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+	
+	<script src="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+	<title>Edspire AI | Select Chapters</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles/nav.css">
+	<link rel="stylesheet" type="text/css" href="styles/flex.css">
+	<link rel="stylesheet" type="text/css" href="styles/quiz.css">
+	
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/nav.css') }}">
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/flex.css') }}">
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/table.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/quiz.css') }}">
+<style>
+
+	#logout{
+		transition: 1s;
+	border-radius: 3px;
+	padding: 10px 30px;
+	position: absolute;
+	top: 60px;
+	right: 10px;
+	background-color: white;
+	border: 1px solid #80808078;
+	
+	font-family: "Inter-Regular";
+	display: none;
+	animation-fill-mode: forwards;
+	cursor: pointer;
+	}
+	#logout button{
+	
+	background-color: white;
+	border: 1px solid #80808078;
+	text-decoration: none;
+	color: black;
+	outline: none;
+	border: none;
+	font-family: "Inter-Semibold";
+	font-size: 1.0rem;
+	cursor:pointer;
+	}
+	#spanlast:hover #logout{
+		display: block;
+	}
+	#profile_pic {
+    height: 35px;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+#spanlast:hover #profile_pic{
+	box-sizing: border-box;
+    padding: 0px;
+    background-color: #eaeeff;
+    border-radius: 50%;	
+}
+.underline{
+	border-bottom: 3px solid #000000;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 2px;
+}.question_text {
+    font-weight: lighter;
+    margin-top: 5px;
+}
+#answer {
+    width: 50vw;
+    padding: 13px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+    font-family: 'Inter-Regular';
+    /* border-top-right-radius: 0px; */
+    /* border-bottom-right-radius: 0px; */
+	outline: auto;
+}
+#quiz{
+	padding-left: 30px;
+}
+@media(max-width: 768px){
+	#quiz{
+	padding-left: 0px;
+}
+}
+@media (max-width: 768px){
+.flexbox_row span:nth-child(2) {
+    margin-left: 0px;
+    width: auto;
+}
+.flexbox_row form span{
+	padding: 10px 20px !important;
+		
+		
+		font-size: 0.8rem;
+}
+.end{
+	margin-bottom: 0px !important;
+}
+#interactive_buttons{
+	justify-content: space-between;
+	width: 75vw;
+}
+}
+.instructions{
+	text-align: left;
+	font-family: "Inter-Regular";
+	
+    width: 75vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+	line-height: 1.6;
+}
+.instructions img{
+	height: 1.8rem;
+	margin-bottom: -4px;
+}
+.bold2{
+	font-family: 'Inter-SemiBold';
+}
+
+.flex_row_2{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+.slider{
+	flex-grow: 1;
+	margin: 0px 20px;
+}
+	</style>
+<script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+<body onload="createNav()">
+	<div class="wrapper">
+	<nav id="navbar"></nav>
+<div class='invisible' id='logout'>
+
+	<form action="/logout" method="Post">
+		<button type = "submit">Logout</button>
+		</form></div>
+
+		<div  id="myDiv" class="{{status}}" role="alert" style="    
+padding: 0px 15px;
+background-color: #ff4f4f;
+color: white;
+width: 100%;
+font-family: 'Inter-Light';
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-content: center;
+align-items: center;
+box-sizing: border-box;">
+
+
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			  <h4 id="incpass">{{ message }}
+			  
+			  <h4 id="close" onclick="dis()">✖</h4>
+			  </h4> 
+		  
+		{% endfor %}  
+		{% endif %}
+		{% endwith %}
+		
+		</div> 
+
+	<center style="margin-top:0px;">
+		<div style="background-color: var(--light-blue);padding: 30px 0px;">
+	<div class="flexbox_row flexbox_row_quiz" style="border-left: 4px solid var(--yellow);padding-left:30px;">
+		<span class="align_left"><h1 class="heading_bold remove_margin_bottom">{{courseID}}</h1><br><h3 class="subheading remove_margin_top">{{course}}</h3></span>
+		
+
+	</div>
+	<p class="instructions">
+		<img src="{{ url_for('static',filename='assets/pad.png') }}">  This test will proceed like a <span class="bold2">simple diagnostic test.</span> Just try to answer every question displayed on the screen.<br>
+
+		<img src="{{ url_for('static',filename='assets/pad.png') }}">  After the questions are done, we will analyse your input and engineer an <span class="bold2">accurate and effective 
+		study plan</span> within seconds, which will be displayed on the diagnosis page, right after the test.<br>
+
+		<img src="{{ url_for('static',filename='assets/pad.png') }}">  For any assistance on navigating the test, you can always click the       <span class="bold2">help icon.</span></p></div>
+
+	<div class="flexbox_col" id="quiz">
+		<h2 class="underline">Welcome to the test!</h2></span>
+		<p class="instructions">First, move the slider to select the number of chapters:<br><span class="bold2">
+			You will be tested on all chapters from chapter 1 through your selection.</span>
+		
+		<ul style="list-style-type: none;font-weight: bold;">
+			<li>1. Vectors, vector addition, and scalar multiplication</li>
+			<li>	2. Vector geometry in Rn and correlation coefficients</li>
+				<li>  3. Planes in R3</li>
+					<li>  4. Span, subspaces, and dimension</li>
+						<li>  5. Basis and orthogonality</li>
+							<li>	6. Projections</li>
+								<li>  7. Applications of projections in Rn : orthogonal bases of planes and linear regression</li>
+									<li>   8. Multivariable functions, level sets, and contour plots</li>
+										<li>  9. Partial derivatives and contour plots</li>
+		</ul>
+		
+		</p>
+
+			
+<br><br>
+            <form action="/test" method="post">
+ 			<div class="flex_row_2">
+				<div style="text-align:center;">
+				<bold class="bold2">Chapter 1</bold><br>
+				<span style="font-style: italic;">Vector Algebra</span></div>
+				<input type="range" min="1" max="9" value="4" class="slider" name="myRange" id="myRange">
+
+				<div style="text-align:center;">
+					<bold class="bold2">Chapter 9</bold><br>
+					<span style="font-style: italic;">Partial derivatives and contour plots</span></div>
+			</div><center style="margin-top: 0px;"><p style="text-align: center; font-family: 'Inter-SemiBold';">Till Chapter <span id="demo"></span></p></center>
+			
+			<div class="flexbox_row" id="interactive_buttons">
+	
+				<span id="endspan"><button type="submit" formaction="/end_test" class="end" style="    padding: 10px 20px !important;
+					color: #3F3F3F !important;
+					background-color: #FF7B7B !important;
+					font-size: 0.8rem;">END TEST</button></span>
+				
+				
+				<span><button type="submit" name="action" value="submit"  style="    padding: 10px 20px !important;
+					color:black !important;
+					background-color:#FFC961 !important;
+					font-size: 0.8rem;
+					border-radius: 0px !important;">PROCEED</button></span>
+				
+				
+			  </form>
+		</div>
+</div>
+
+
+
+
+
+
+	</center>
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript">
+		function dis(){
+		  document.getElementById("myDiv").style.display = "none";
+		}
+		
+	  </script>
+
+	</div>
+	<script>
+		var slider = document.getElementById("myRange");
+		var output = document.getElementById("demo");
+		output.innerHTML = slider.value;
+		
+		slider.oninput = function() {
+		  output.innerHTML = this.value;
+		}
+		</script>
+		
+</body>
+</html>

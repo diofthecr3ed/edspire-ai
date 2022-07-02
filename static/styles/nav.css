@@ -1,0 +1,151 @@
+@font-face {
+  font-family: 'Inter-Regular';
+  src: url('Inter-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter-SemiBold';
+  src: url('../assets/fonts/static/Inter-SemiBold.ttf') format('truetype');
+}
+
+:root {
+  --blue: #117AFF;
+  --white: #ffffff;
+  --light-blue:#EAEEFF;
+  --dark-blue:#142E63;
+  --yellow:#FFC961;
+}
+
+nav{
+	background-color: var(--white);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	font-family: "Inter-SemiBold";
+	justify-content: flex-start;
+	align-items: center;
+	width: 100vw;
+	font-size: 1.1rem;
+	border-bottom:1px solid #0D61CC;
+}
+nav span{
+	padding: 10px 20px 10px 20px;
+	margin-left: 2%; 
+}
+nav span a{
+	text-decoration: none;
+	color: #0d61cc;
+}
+body{
+	margin:0px;
+}
+nav span img:nth-child(1){
+	margin-top: 5px;
+    height: 45px;
+
+}
+nav span:nth-of-type(4){
+	margin-left: auto;
+
+}
+#profile_pic {
+    height: 35px;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+#spanlast:hover #profile_pic{
+	box-sizing: border-box;
+    padding: 0px;
+    background-color: #eaeeff;
+    border-radius: 50%;	
+}
+
+
+@media(max-width: 768px){
+nav span:nth-of-type(1){
+	width: 100%;
+
+}
+#profile_pic{
+	height: 45px; margin-right: 0px;
+}
+nav{
+	background-color: var(--white);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	font-family: "Inter-SemiBold";
+	justify-content: flex-start;
+	align-items: center;
+	width: 100vw;
+	font-size: 1.1rem;
+	border-bottom:1px solid #0D61CC;
+}
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:  #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+#help{
+	color: var(--blue);
+	margin-left: auto;
+	margin-right: 2%;
+}
+#help a{
+	color: var(--blue);
+	font-family: "Inter-Regular";
+	font-size: 90%;
+	padding: 10px 20px 10px 20px;
+}
+#logo2{
+	padding: 20px;
+}
+
+@media(max-width: 768px){
+	#logo2{
+	display: none;
+}
+}
+
+*:focus {
+    outline: none;
+}
+
+nav span:nth-child(2) {
+    border-left: 1px solid #A5C4EC;
+	margin-left: 30px;
+}
+nav span:nth-child(3) {
+    border-left: 1px solid #A5C4EC;
+	margin-left: 0px;
+}
+@media(max-width: 768px){
+	nav span:nth-child(2) {
+	border-left: none;
+		margin-left: 10px;
+	}
+}
+
+nav span a:hover{
+   
+    color: var(--dark-blue) !important;
+}

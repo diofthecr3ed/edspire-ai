@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LXD3HSTXJK"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-LXD3HSTXJK');
+	</script>
+
+	<title>Edspire AI | Register</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles/nav.css">
+	<style>
+		nav span:nth-child(2) {
+    border-left:none;
+    margin-left: 10px;
+}
+	</style>
+<!-- 	<link rel="stylesheet" type="text/css" href="styles/flex.css"> -->
+<link rel="stylesheet" type="text/css" href="styles/login.css">
+
+</head>
+<body onload="createNav()">
+
+	
+
+	<nav id="navbar"></nav>
+
+	
+	<div  id="myDiv" class="{{status}}" role="alert" style="    
+	padding: 0px 15px;
+	background-color: #ff4f4f;
+	color: white;
+	width: 100%;
+	font-family: 'Inter-Light';
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+	box-sizing: border-box;">
+
+
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			  <h4 id="incpass">{{ message }}</h4> 
+			  
+			  <h4 id="close" onclick="dis()">✖</h4>
+			  </h4> 
+		  
+		{% endfor %}  
+		{% endif %}
+		{% endwith %}
+		
+		</div>
+
+	<center>
+	<div class="wrapper">
+		<div class="left panel"><div class="container_left"><a href="#" id="phone_logo"><img src="assets/newlogophone.png"></a>
+			<h1 class="heading_bold">Welcome!</h1><p>We are excited to see you join! Getting started is simple, please create your account and log in to begin testing and learning better!</p><img src="assets/logingraphic.png" class="logingraphic">
+			</div>
+		</div>
+		<div class="right panel">
+			<div class="container_right">
+
+
+
+
+<form action="/register" method="post" class="form2">
+	<div class="form_heading">Create New Account</div>
+  <div class="container1">
+    <input type="text" placeholder="Username*" name="username" required class="username"><br>
+    <input type="text" placeholder="Email*" name="email" required class="email"><br>
+    <div style="display: flex; align-items: center;">
+    <input type="password" placeholder="Password*" name="password" required id="password"><span id="toggle"><img src="assets/togglepass.png" style="height: 18px;">
+
+</span></div>
+<div style="display: flex; align-items: center;">
+
+	<input type="password" placeholder="Confirm Password*" name="confirm" style="	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;" required id="password2" class="uname"><span id="toggle2" style="    background-color: var(--light-blue);
+	padding: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;"><img src="assets/togglepass.png" style="height: 18px;">
+	</span></div>
+
+
+<select label="School" aria-placeholder="School" name="school" required class="uname school" style="
+	width: 100%;
+	padding: 13px;
+	box-sizing: border-box;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	border: none;
+	background-color: var(--light-blue);
+	font-family: 'Inter-Regular'
+	
+">
+	<option value="Stanford">Stanford</option>
+
+	
+</select>
+
+    <button type="submit">SIGN UP</button>
+  </div>
+  <p> <span class="bold">Already have an account?</span><br>
+    <span  id='help'><a href='login'>Login Here ></a></span> 
+ </p>
+</form>
+
+
+
+
+			</div>
+			<span  class='help_mobile'><a href='#'>Need help? Contact us >	</a></span>
+		</div>
+	</div>
+	</center>
+	<script type="text/javascript" src="scripts/nav_prelogin.js"></script>
+	<script src="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+	<script src="{{ url_for('static', filename='scripts/nav_prelogin.js') }}"></script>
+	<script type="text/javascript">
+		const passwordEle = document.getElementById('password');
+const toggleEle = document.getElementById('toggle');
+
+toggleEle.addEventListener('click', function () {
+    const type = passwordEle.getAttribute('type');
+
+    passwordEle.setAttribute(
+        'type',
+        // Switch it to a text field if it's a password field
+        // currently, and vice versa
+        type === 'password' ? 'text' : 'password'
+    );
+});
+	</script>
+	<script type="text/javascript">
+		const passwordElem = document.getElementById('password2');
+const toggleElem = document.getElementById('toggle2');
+
+toggleElem.addEventListener('click', function () {
+    const type = passwordElem.getAttribute('type');
+
+    passwordElem.setAttribute(
+        'type',
+        // Switch it to a text field if it's a password field
+        // currently, and vice versa
+        type === 'password' ? 'text' : 'password'
+    );
+});
+	</script>
+
+<script language="javascript" type="text/javascript">
+	function dis(){
+	  document.getElementById("myDiv").style.display = "none";
+	}
+	
+  </script>
+	
+</body>
+</html>

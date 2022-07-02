@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LXD3HSTXJK"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-LXD3HSTXJK');
+	</script>
+
+	<title>Edspire AI | Login</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles/nav.css">
+<!-- 	<link rel="stylesheet" type="text/css" href="styles/flex.css"> -->
+<link rel="stylesheet" type="text/css" href="styles/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+
+
+
+.invisible{
+  display: none;
+}
+.visible{
+  display: block;
+}
+#con{
+  text-align: center;
+}
+#myDiv{
+
+}
+@media (max-width: 768px) {
+
+    .visible {
+    width: 100%;
+    margin-left:0% !important ;
+  }
+
+}
+nav span:nth-child(2) {
+    border-left: none;
+    margin-left: 10px;
+}
+</style>
+</head>
+<body onload="createNav()">
+
+	
+	<nav id="navbar"></nav>
+
+
+ <div  id="myDiv" class="{{status}}" role="alert" style="    
+  padding: 0px 15px;
+  background-color: #ff4f4f;
+  color: white;
+  width: 100%;
+  font-family: 'Inter-Light';
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  box-sizing: border-box;">
+
+
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			  <h4 id="incpass">{{ message }}
+			  
+			  <h4 id="close" onclick="dis()">✖</h4>
+			  </h4> 
+		  
+		{% endfor %}  
+		{% endif %}
+		{% endwith %}
+		
+		</div>
+
+  
+  
+
+ 
+
+	<center>
+	<div class="wrapper">
+		<div class="left panel"><div class="container_left"><a href="#" id="phone_logo"><img src="assets/newlogophone.png"></a>
+			<h1 class="heading_bold">Welcome!</h1><p>To go to your dashboard now, please login to your existing account. We are excited to help you improve your skills and learn better!</p><img src="assets/logingraphic.png" class="logingraphic">
+			</div>
+		</div>
+		<div class="right panel">
+			<div class="container_right">
+
+
+
+
+<form action="/login" method="post">
+	<div class="form_heading">Your Account</div>
+  <div class="container1">
+    <input type="text" placeholder="Username*" name="username" required class="username"><br>
+    <div style="display: flex; align-items: center;">
+    <input type="password" placeholder="Password*" name="password" required id="password"><span id="toggle"><img src="assets/togglepass.png" style="height: 17px;">
+
+</span></div>
+
+
+    <button type="submit">LOG IN</button>
+  </div>
+    <p> <span class="bold">First time here?</span><br>
+    <span  id='help'><a href='register'>Create Your Account ></a></span>
+ </p>
+</form>
+
+
+
+			</div>
+			<span  class='help_mobile'><a href='#'>Need help? Contact us >	</a></span>
+		</div>
+	</div>
+	</center>
+	<script type="text/javascript" src="scripts/nav_prelogin.js"></script>
+	<script src="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+	<script src="{{ url_for('static', filename='scripts/nav_prelogin.js') }}"></script>
+	<script type="text/javascript">
+		const passwordEle = document.getElementById('password');
+const toggleEle = document.getElementById('toggle');
+
+toggleEle.addEventListener('click', function () {
+    const type = passwordEle.getAttribute('type');
+
+    passwordEle.setAttribute(
+        'type',
+        // Switch it to a text field if it's a password field
+        // currently, and vice versa
+        type === 'password' ? 'text' : 'password'
+    );
+});
+	</script>
+
+<script language="javascript" type="text/javascript">
+	function dis(){
+	  document.getElementById("myDiv").style.display = "none";
+	}
+	
+  </script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LXD3HSTXJK"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-LXD3HSTXJK');
+	</script>
+
+
+	<title>Edspire AI | Dashboard</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/nav.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/flex.css') }}">
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/nav.css') }}">
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/flex.css') }}">
+	
+<style>
+	.flexbox_card form{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: auto;
+    width: 100%;
+	height: 100%;
+
+    margin: -1%;
+    background-color: var(--light-blue);
+    font-family: 'Inter-Light';
+    border-radius: 1px;
+    text-align: left;
+    margin-left: 0px !important;
+border-radius: 10px;
+}
+.username{
+			
+			position: static;
+    padding: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+    border: none;
+    background-color: var(--light-blue);
+    font-family: 'Inter-Regular';
+    right: 0px;
+	opacity: 1;
+	z-index: 0;
+	transition-delay: 0ms;
+    
+	animation-fill-mode: forwards;  
+	
+		}
+
+@media (max-width: 768px){
+.username{
+			
+			position: static;
+    padding: 11px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--light-blue);
+    font-family: 'Inter-Regular';
+    right: 0px;
+	opacity: 1;
+	z-index: 0;
+	transition-delay: 0ms;
+    width: 100%;
+	animation-fill-mode: forwards;  
+		}
+}
+		.username:focus{
+			outline: none;
+		}
+		.animate{
+			z-index: -1;
+			opacity: 0;
+	animation: comein 0.5s forwards;
+		}
+
+		@keyframes comein {
+  0% {right: -185px;
+    z-index: -1;
+    opacity: 0;
+	position: relative;}
+	50% {right: -185px;
+    z-index: -1;
+    opacity: 0.3;
+position: relative;}
+  95% {right: 0px;
+    z-index: -1;
+    opacity: 1;
+	position: relative;
+	}
+	100%{
+		right: 0px;
+    z-index: -1;
+    opacity: 1;
+		position: static;
+		
+	}
+}
+#alertbox{
+	background-color: #FF7B7B;
+	color: white;
+}
+
+
+	#logout{
+		transition: 1s;
+	border-radius: 3px;
+	padding: 10px 30px;
+	position: absolute;
+	top:60px;
+	right: 10px;
+	background-color: white;
+	border: 1px solid #80808078;
+	
+	font-family: "Inter-Regular";
+	display: none;
+	animation-fill-mode: forwards;
+	cursor:pointer;
+	}
+	#logout button{
+	
+	background-color: white;
+	border: 1px solid #80808078;
+	text-decoration: none;
+	color: black;
+	outline: none;
+	border: none;
+	font-family: "Inter-Semibold";
+	font-size: 1.0rem;
+	cursor:pointer;
+	}
+#spanlast:hover #logout{
+	display: block;
+}
+
+#profile_pic {
+    height: 35px;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+#spanlast:hover #profile_pic{
+	box-sizing: border-box;
+    padding: 0px;
+    background-color: #eaeeff;
+    border-radius: 50%;	
+}
+.flexbox_row span button {
+    padding: 10px 20px 10px 19px;
+    font-family: 'Inter-Light';
+    background-color: var(--blue);
+	
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+    border: none;
+    color: white;
+}
+.start{
+	border-bottom-left-radius: 10px;
+}
+.past{
+	border-bottom-right-radius: 10px;
+}
+.description{
+	color:#767780;
+}
+</style>
+
+</head>
+<body onload="createNav()">
+	<div class="wrapper">
+	<nav id="navbar"></nav>
+<div class='invisible' id='logout'>
+
+	<form action="/logout" method="Post">
+		<button type = "submit">Logout</button>
+		</form>
+
+</div>
+<div  id="myDiv" class="{{status}}" role="alert" style="    
+padding: 0px 15px;
+background-color: #ff4f4f;
+color: white;
+width: 100%;
+font-family: 'Inter-Light';
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-content: center;
+align-items: center;
+box-sizing: border-box;">
+
+
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			  <h4 id="incpass">{{ message }}
+			  
+			  <h4 id="close" onclick="dis()">✖</h4>
+			  </h4> 
+		  
+		{% endfor %}  
+		{% endif %}
+		{% endwith %}
+		
+		</div> 
+
+
+		
+	
+
+	<center>
+
+
+
+	<div class="flexbox_row">
+		<span><h1 class="heading light underline">Your Courses</h1></span>
+
+		<form action ="/add_new_course" method="POST" style="margin-left:auto ;">
+		<span><input type="text" placeholder="Enter Course Code" name="course_id" class="username" id="animatebutton"><button  onclick="appear()">Add New Course +</button></span>
+
+			</form>
+
+	</div>
+
+
+
+	<div class="flexbox">
+		<div class="flexbox_row"><h2 class="section_heading">Summer 2022</h2></div>
+		<div class="flexbox_grid" class="carousel">
+			
+			{%for name in names%}
+			<div class="flexbox_card">
+			<form action = "/start_new_test" method = "POST">
+			
+				<div class="card_header">
+				<h2>{{name}}</h2>
+				<p class="description">{{names[name][0]}}</p>
+			</div>
+			<div class="card_buttons">
+				<button type = "submit" class="card_footer start" name="action" value = "{{names[name][1]}}">Start New Test</button><button type = "submit" class="card_footer_2 past" name="action" value = "{{names[name][1]}}" formaction="/get_history">View Past Tests</button></div>
+			
+		</form>
+	</div>
+			{% endfor %}
+
+			<!-- <div class="flexbox_card">
+				<div class="card_header">
+				<h2>EE 374</h2>
+				<p>Blockchain foundations</p>
+			</div>
+				<div class="card_buttons">
+				<form method = "post" action="/history">
+				<a href="quiz.html"><button class="card_footer">Start new test</button></a><a href="history.html"><button class="card_footer_2">View Past Tests</button></a></div>
+			</form>
+			</div>
+
+
+			<div class="flexbox_card">
+				<div class="card_header">
+				<h2>EE 374</h2>
+				<p>Blockchain foundations</p>
+			</div>
+				<div class="card_buttons">
+				<a href="quiz.html"><button class="card_footer">Start new test</button></a><a href="history.html"><button class="card_footer_2">View Past Tests</button></a></div>
+			</div>
+
+
+			<div class="flexbox_card">
+				<div class="card_header">
+				<h2>EE 374</h2>
+				<p>Blockchain foundations</p>
+			</div>
+				<div class="card_buttons">
+				<a href="quiz.html"><button class="card_footer">Start new test</button></a><a href="history.html"><button class="card_footer_2">View Past Tests</button></a></div>
+			</div> -->
+
+		</div>
+
+		<!-- <div class="flexbox_row"><h2 class="section_heading">Fall 2021</h2></div>
+		<div class="flexbox_grid">
+			<div class="flexbox_card">
+				<div class="card_header">
+				<h2>EE 374</h2>
+				<p>Blockchain foundations</p>
+			</div>
+				<div class="card_buttons">
+				<a href="quiz.html"><button class="card_footer">Start new test</button></a><a href="history.html"><button class="card_footer_2">View Past Tests</button></a></div>
+			</div>
+		</div> -->
+	</div>
+	</center>
+	<script src="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+	<script src="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+	<script>
+		function appear() {
+  var element = document.getElementById("animatebutton");
+  element.classList.toggle("animate");
+}
+	</script>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript">
+		function dis(){
+		  document.getElementById("myDiv").style.display = "none";
+		}
+		
+	  </script>
+	  <script>
+		$(document).ready(function(){
+
+			
+  $("#profile_pic").click(function(){
+	if ($("#logout").hasClass("invisible")){
+    $("#logout").addClass("visible");
+	$("#logout").removeClass("invisible");}
+    else{
+    $("#logout").addClass("invisible");
+	$("#logout").removeClass("visible");
+    
+  };}
+  )});
+
+
+	  </script>
+</body>
+</html>

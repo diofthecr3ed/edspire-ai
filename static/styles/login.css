@@ -1,0 +1,254 @@
+
+@font-face {
+  font-family: 'Inter-ExtraBold';
+  src: url('../assets/fonts/static/Inter-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter-Light';
+  src: url('../assets/fonts/static/Inter-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter-ExtraLight';
+  src: url('../assets/fonts/static/Inter-ExtraLight.ttf') format('truetype');
+}
+.wrapper{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+}
+.panel{
+	width: 50%;
+	 height: calc(100vh - 40px);
+	 display: flex;
+}
+#phone_logo{
+	 display: none;
+}
+.left{
+	background-color: white;
+
+}
+
+.right{
+	background-color: var(--light-blue);
+	
+}
+.logingraphic{
+	width: 100%;
+}
+.container_left{
+	width: 50%;
+	margin: auto;
+}
+body{
+	overflow: hidden;
+}
+
+.panel h1{
+	font-family: 'Inter-ExtraBold';
+	margin-top: -10px;
+}
+.panel p{
+	font-family: 'Inter-Regular';
+}
+
+.container_right{
+	width: 40%;
+	margin: auto;
+	background-color: white;
+	border-radius: 17px;
+box-shadow: 0px 3px 4px 0px #00000054;
+}
+form .container1{
+	width: 85%;
+
+}
+
+form .container1 input{
+	width: 100%;
+	padding: 13px;
+	box-sizing: border-box;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	border: none;
+	background-color: var(--light-blue);
+	font-family: 'Inter-Regular'
+	
+}
+form .container1 button{
+	width: 100%;
+	padding: 13px 0px 13px 13px;
+	box-sizing: border-box;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	border: none;
+	background-color: var(--blue);
+	font-family: 'Inter-Regular';
+	color: white;
+	transition: 0.2s;
+}
+
+form{
+	font-family: 'Inter-Regular';
+}
+.bold{
+	font-family: 'Inter-SemiBold';
+}
+.form_heading{
+	padding: 13px 0px;
+	text-align: center;
+	width: 100%;
+	background-color: var(--dark-blue);
+	color: white;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	margin-bottom: 20px;
+
+}
+
+form .container1 button:hover{
+
+	background-color: #117affab;
+
+	
+}
+form p{
+	margin-bottom: 30px;
+}
+
+form .container1 input:focus{
+outline: none;
+	
+}
+
+form .container1 div {
+outline: none;
+	
+}
+
+#toggle{
+	background-color: var(--light-blue);
+	padding: 9.3px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px; 
+}
+.form2 #toggle{
+	background-color: var(--light-blue);
+	padding: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px; 
+}
+#toggle2{
+	background-color: var(--light-blue);
+	padding: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px; 
+}
+#password{
+		border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px; 
+}
+
+
+
+.help_mobile{
+display: none;
+}
+
+
+
+@media(max-width: 768px){
+	.panel{
+	width: 100%;
+	 height: auto;
+	 display: flex; flex-direction: column;
+}
+
+.wrapper{
+flex-direction: column;
+}
+.logingraphic{
+	display: none;
+}
+#password2{
+	border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+
+
+
+
+
+.left{
+	background-color: var(--dark-blue);
+	color: white;
+	text-align: left;
+	padding:7% 4%;
+	margin-bottom: 10%;
+	box-sizing: border-box;	
+}
+
+.container_left{
+	width: 90%;
+	margin: auto;
+}
+body{
+	overflow:scroll;
+		background-color: var(--light-blue);
+}
+
+.panel h1{
+	font-family: 'Inter-ExtraLight';
+	margin-top: 10px;
+	font-size: 25px;
+}
+.panel p{
+	font-family: 'Inter-Regular';
+}
+
+.container_right{
+	width: 85%;
+	margin: auto;
+	background-color: white;
+	border-radius: 17px;
+box-shadow: 0px 3px 4px 0px #00000054;
+}
+nav{
+	display: none !important;
+}
+#phone_logo{
+	display: block;
+	
+}
+#phone_logo img{
+	margin-bottom: 10px;
+	height: 30px;
+}
+.help_mobile{
+	margin-bottom: 20px;
+	display: block;
+	color: var(--blue);
+	font-family: 'Inter-Light';
+	margin-top: 20px;
+}
+.help_mobile a{
+	display: block;
+	color: var(--blue);
+	font-family: 'Inter-Light';
+	margin-top: 20px;
+}
+}
+
+@media(min-width: 768px){
+	.form2{
+		margin-top: -30px;
+	}
+}
+a:hover{
+	color: var(--dark-blue) !important;
+}

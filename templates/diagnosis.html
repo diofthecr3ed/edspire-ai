@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LXD3HSTXJK"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LXD3HSTXJK');
+    </script>
+  <title>Edspire AI | Diagnosis</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles/nav.css">
+  <link rel="stylesheet" type="text/css" href="styles/flex.css">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/nav.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/flex.css') }}">
+
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/table.css') }}">
+
+<style>
+ th:nth-child(2) {
+    border-collapse: separate;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 6px;
+}
+
+	#logout{
+		transition: 1s;
+	border-radius: 3px;
+	padding: 10px 30px;
+	position: absolute;
+	top:60px;
+	right: 10px;
+	background-color: white;
+	border: 1px solid #80808078;
+	
+	font-family: "Inter-Regular";
+	display: none;
+	animation-fill-mode: forwards;
+	cursor:pointer;
+	}
+	#logout button{
+	
+	background-color: white;
+	border: 1px solid #80808078;
+	text-decoration: none;
+	color: black;
+	outline: none;
+	border: none;
+	font-family: "Inter-Semibold";
+	font-size: 1.0rem;
+	cursor:pointer;
+	}
+#spanlast:hover #logout{
+	display: block;
+}
+#profile_pic {
+    height: 35px;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+#spanlast:hover #profile_pic{
+	box-sizing: border-box;
+    padding: 0px;
+    background-color: #eaeeff;
+    border-radius: 50%;	
+}
+</style>
+</head>
+<body onload="createNav()">
+  <script src="//d3js.org/d3.v5.min.js"></script>
+<script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+<script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+  <div class="wrapper">
+  <nav id="navbar"></nav><div class='invisible' id='logout'>
+
+    <form action="/logout" method="Post">
+      <button type = "submit">Logout</button>
+      </form></div>
+    <center style="margin-top:0px ;">
+      <div style="background-color: var(--light-blue);padding: 30px 0px;">
+        <div class="flexbox_row" style="justify-content: space-between;border-left: 4px solid var(--yellow);padding-left:30px;">
+    <span class="align_left"><h1 class="heading_bold remove_margin_bottom">{{course_name}}</h1><br><h4 class="subheading remove_margin_top">{{course_description}}</h4></span>
+    <form action="/start_new_test" method="post">
+    <span><button value = "{{subject_id}}" name="action" style="display:flex;align-items:center;border-radius: 10px;">Start New Test<img src="assets/start.png" style="height: 20px; margin-left:5px;"></button></span>
+    </form>
+  </div></div>
+  <div class="flexbox_row">
+    <span><h1 class="heading heading_small" style="border-bottom:3px solid black ;">Test Diagnosis</h1></span>
+    
+  </div>
+
+  {%if perfect%}
+
+  <p>Perfect Score! You're set for an A+</p></center>
+
+  
+  {%else%}
+  <table>
+    <tr>
+    <th>Topic</th>
+    <th>Core Topics Causing Error</th>
+    
+  </tr>
+  {%for topic, subtopic in topics|zip(subtopics)%}
+
+        <tr>
+          <td>{{topic}}</td>
+          <td>{{subtopic}}</td>
+        </tr>
+
+
+  {% endfor %}
+  {% endif %}
+
+  
+
+  <!-- <tr>
+    <td>Test 1</td>
+    <td>06/13/21</td>
+    <td>1-5</td>
+  </tr>
+  <tr>
+    <td>Test 2</td>
+    <td>06/13/21</td>
+    <td>1-5</td>
+  </tr>
+  <tr>
+    <td>Test 3</td>
+    <td>06/13/21</td>
+    <td>1-5</td>
+  </tr>
+  <tr>
+    <td>Test 4</td>
+    <td>06/13/21</td>
+    <td>1-5</td>
+  </tr>
+  <tr>
+    <td>Test 5</td>
+    <td>06/13/21</td>
+    <td>1-5</td>
+  </tr> -->
+ 
+</table>
+
+{%if not perfect%}
+<div class="flexbox_row" style="margin-top: 20px;">
+   <span><h1 class="heading heading_small" style="border-bottom:3px solid black ;">Graph Results</h1></span>
+  
+</div>
+<div id="graph" style="text-align: center;"></div>
+{% endif %}
+<script>
+
+var dotIndex = 0;
+var graphviz = d3.select("#graph").graphviz()
+    .transition(function () {
+        return d3.transition("main")
+            .ease(d3.easeLinear)
+            .delay(500)
+            .duration(1500);
+    })
+    .logEvents(true)
+    .on("initEnd", render);
+
+function render() {
+    var dotLines = dots[dotIndex];
+    var dot = dotLines.join('');
+    graphviz
+        .renderDot(dot)
+        .on("end", function () {
+            dotIndex += 1;
+            if (dotIndex != dots.length) {
+                render();
+            }
+        });
+}
+
+var dots = {{dots | safe}};
+
+</script>
+  </center>
+  <script src="{{ url_for('static', filename='/scripts/nav.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript">
+		function dis(){
+		  document.getElementById("myDiv").style.display = "none";
+		}
+		
+	  </script>
+	  <script>
+		$(document).ready(function(){
+
+			
+  $("#profile_pic").click(function(){
+	if ($("#logout").hasClass("invisible")){
+    $("#logout").addClass("visible");
+	$("#logout").removeClass("invisible");}
+    else{
+    $("#logout").addClass("invisible");
+	$("#logout").removeClass("visible");
+    
+  };}
+  )});
+
+
+	  </script>
+  </div>
+</body>
+</html>
